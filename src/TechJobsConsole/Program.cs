@@ -55,7 +55,7 @@ namespace TechJobsConsole
                     string columnChoice = GetUserSelection("Search", columnChoices);
 
                     // What is their search term?
-                    Console.WriteLine("\nSearch term: ");
+                    Console.WriteLine("\nSearch term: "); 
                     string searchTerm = Console.ReadLine();
 
                     List<Dictionary<string, string>> searchResults;
@@ -63,7 +63,9 @@ namespace TechJobsConsole
                     // Fetch results
                     if (columnChoice.Equals("all"))
                     {
-                        Console.WriteLine("Search all fields not yet implemented.");
+                        searchResults = JobData.FindByValue(searchTerm); /* the parameter is the input or words introduced by the user*/
+                        PrintJobs(searchResults);
+                       /* Console.WriteLine("Search all fields not yet implemented.");*/
                     }
                     else
                     {
@@ -118,7 +120,22 @@ namespace TechJobsConsole
 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            Console.WriteLine("PrintJobs is not implemented yet");
+            if(someJobs.Count == 0)
+            {
+                Console.WriteLine(" No result found!!!... Try again...");
+                return;
+            }
+            foreach (Dictionary<string,string> kpv in someJobs)
+            {
+                Console.WriteLine("\n*****");
+                foreach (KeyValuePair<string, string> row in kpv)
+                    Console.WriteLine(row.Key+  ":" + row.Value);
+                    Console.WriteLine("*****");
+                /*  Console.WriteLine("PrintJobs is not implemented yet");*/
+            }
         }
     }
 }
+
+
+
